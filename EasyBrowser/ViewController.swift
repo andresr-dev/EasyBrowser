@@ -8,10 +8,15 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    let websites = ["apple.com", "hackingwithswift.com", "google.com"]
+    var websites = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let url = Bundle.main.url(forResource: "websites", withExtension: "txt")!
+        if let sites = try? String(contentsOf: url).components(separatedBy: "\n") {
+            websites = sites.dropLast()
+        }
         
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Easy Browser"
